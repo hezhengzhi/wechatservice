@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>iview</title>
+    <link rel="stylesheet" type="text/css" href="http://unpkg.com/iview/dist/styles/iview.css">
+    <script type="text/javascript" src="http://vuejs.org/js/vue.min.js"></script>
+    <script type="text/javascript" src="http://unpkg.com/iview/dist/iview.min.js"></script>
+    <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+
+    <style>
+        .mydiv{
+            width:500px;
+            height:200px;
+            position:absolute;
+            left:50%;
+            top:50%;
+            margin:-100px 0 0 -150px
+        }
+
+
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+
+
+
+        #head {
+            height: 60px;
+            width: 100%;
+            background-color: #66CCCC;
+            text-align: center;
+            position: relative;
+        }
+
+
+        .title {
+            font-family: "宋体";
+            color: #FFFFFF;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);  /* 使用css3的transform来实现 */
+            font-size: 36px;
+            height: 40px;
+            width: 30%;
+        }
+
+
+        #message {
+            font-family: "黑体";
+
+        }
+
+
+
+
+
+    </style>
+</head>
+<body>
+<div class="header" id="head">
+    <div class="title">微信营销转储管理系统</div>
+
+</div>
+<div id="app" >
+
+
+    <div class="mydiv">
+        <p id="message" class="">账号密码登陆</p>
+
+
+
+        <div class="form-group has-feedback">
+            <input type="text" class="form-control" v-model="username" placeholder="请输入账号">
+            <span class="glyphicon glyphicon-user form-control-feedback"></span>
+        </div>
+
+            <br>
+        <div class="form-group has-feedback">
+            <input type="password" class="form-control" v-model="password" placeholder="请输入密码">
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        </div>
+        <!--<div class="form-group has-feedback">-->
+            <!--<input type="text" class="form-control" v-model="captcha" @keyup.enter="login" placeholder="验证码">-->
+            <!--<span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>-->
+        <!--</div>-->
+        <!--<div class="form-group has-feedback">-->
+            <!--<img alt="如果看不清楚，请单击图片刷新！" class="pointer" :src="src" @click="refreshCode">-->
+            <!--&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:;" @click="refreshCode">点击刷新</a>-->
+        <!--</div>-->
+        <br>
+        <div class="col-xs-4">
+             <button type="button"  @click="login">登录</button>
+             <button type="button"  @click="login">重置</button>
+        </div>
+
+    </div>
+</div>
+<script>
+    var app=new Vue({
+        el: '#app',
+        data: {
+            username: '',
+            password: '',
+            // captcha: '',
+            //error: false,
+
+            // src: 'http://127.0.0.1:8080/createImg/Yzm'
+        },
+        methods:{
+
+
+
+
+            login: function () {
+                var data = "username=" + vm.username + "&password=" + vm.password ;
+                $.ajax({
+                    type: "POST",
+                    url: "http://127.0.0.1:8080//login",
+                    data: data,
+                    dataType: "json",
+                    success: function (res) {
+                        console.info(res)
+                        if (res.code == 0) {//登录成功
+                            //localStorage.setItem("token", res.token);
+                            parent.location.href = 'index.html';
+                        } else {
+                            parent.location.href = 'erro.html';
+
+                        }
+                    }
+                });
+            }
+        }
+    });
+
+
+
+</script>
+</body>
+</html>
