@@ -44,4 +44,5 @@ public class DataSource2Config {
     public SqlSessionTemplate sqlSessionTemplate(@Qualifier("source2SqlSessionFactory") SqlSessionFactory sqlSessionFactory) {
         return new SqlSessionTemplate(sqlSessionFactory);
     }
+
 }
